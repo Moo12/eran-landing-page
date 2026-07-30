@@ -48,29 +48,50 @@ Business website for **ערן ישראלי**, a one-person iron/metal designer a
 
 ```bash
 cd api && npm run dev      # starts Express on port 3000 (nodemon)
-# open http://localhost:3000        ← landing page
-# open http://localhost:3000/admin/ ← admin panel
+# open http://localhost:3000        <- landing page
+# open http://localhost:3000/admin/ <- admin panel
 
 # To rebuild admin after changes:
 cd admin && npm run build
 ```
 
-**Do NOT use \****`python3 -m http.server`** — the landing page requires the API; relative fetch URLs only work when served by Express.
+Do NOT open `index.html` directly or use `python3 -m http.server` — relative fetch URLs only work when served by Express.
 
 ---
 
 ## Deployment
 
-### Target
-- **Platform:** Node.js host with persistent disk — Render, Railway, Fly.io, or DigitalOcean VPS
-- **Method:** Deploy the Express server; it serves everything (landing page + API + admin)
-- **Single-server (same origin):** keep `API_BASE = ''` in `index.html`
-- **Split hosting (CDN frontend + separate API):** set `API_BASE = 'https://api.yourdomain.com'` in `index.html`
+### Server
+- **Live URL:** https://eran-art.mottomation.com
+- **Host:** DigitalOcean Ubuntu VPS at `174.138.105.11`
+- **App path:** `/var/www/eran-landing-page`
+- **Internal port:** 4000 (ports 3000 and 3001 were taken by other apps)
+- **Process manager:** PM2 (keeps the Express server running, auto-restarts on crash/reboot)
+- **Reverse proxy:** nginx (port 80/443 → 4000), config at `/etc/nginx/sites-available/eran-art.mottomation.com.conf`
+- **SSL:** Let's Encrypt cert for `eran-art.mottomation.com`
+
+### First-time setup (run on server)
+```bash
+git clone git@github.com:Moo12/eran-landing-page.git /var/www/eran-landing-page
+cd /var/www/eran-landing-page
+cd api && npm install --omit=dev && node seed.js && cd ..
+cd admin && npm install && npm run build && cd ..
+pm2 start api/index.js --name eran-landing-page
+pm2 save && pm2 startup
+```
+
+### Updating after a code push
+```bash
+ssh root@174.138.105.11
+cd /var/www/eran-landing-page && git pull
+cd admin && npm install && npm run build && cd ..
+pm2 restart eran-landing-page
+```
 
 ### Database
-- SQLite `api/data.db` — lives on the server's persistent disk
-- Run `node api/seed.js` once after first deploy to seed categories, gallery, and admin user
-- Default admin: `admin` / `eran2024` — **change password in production**
+- SQLite `api/data.db` lives on the server's persistent disk (gitignored)
+- Run `node api/seed.js` once on first deploy to seed categories, gallery, and admin user
+- Default admin: `admin` / `eran2024` — **change password before going live**
 
 ---
 
@@ -89,6 +110,6 @@ cd admin && npm run build
 ## Known Constraints / Gotchas
 
 - **Node v26+** — `better-sqlite3` fails to compile; use `node:sqlite` (built-in) instead
-- **SQLite \****`ALTER TABLE ADD COLUMN`** — does not accept `DEFAULT CURRENT_TIMESTAMP`; use `DEFAULT NULL` (or no default) for migrations
-- **Admin SPA** must be rebuilt (`npm run build`) for changes to take effect in production
-- **`esbuild`**** postinstall** — if blocked by npm, run `npm approve-scripts esbuild` in `admin/`
+- **SQLite ALTER TABLE ADD COLUMN** — does not accept `DEFAULT CURRENT_TIMESTAMP`; omit the default (NULL) in migrations
+- **Admin SPA** must be rebuilt (`npm run build`) after any admin source change
+- **esbuild postinstall** — if blocked by npm, run `npm approve-scripts esbuild` in `admin/`

@@ -8,14 +8,14 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Static files: landing page, gallery images
-app.use(express.static(path.join(__dirname, '..')));
-
-// Built admin SPA served at /admin/
+// Admin SPA must come before root static so admin/dist takes precedence over admin/index.html
 app.use('/admin', express.static(path.join(__dirname, '../admin/dist')));
 app.get('/admin/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../admin/dist/index.html'));
 });
+
+// Static files: landing page, gallery images
+app.use(express.static(path.join(__dirname, '..')));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));
