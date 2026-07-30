@@ -117,6 +117,10 @@ const carousel = makeCarousel({
 db.exec("ALTER TABLE admin_users ADD COLUMN created_at DATETIME");
 ```
 `ALTER TABLE ADD COLUMN` in SQLite does NOT support `DEFAULT CURRENT_TIMESTAMP` (non-constant default) — omit the default and let it be NULL for existing rows.
+## Repository
+- **GitHub:** https://github.com/Moo12/eran-landing-page (private)
+- **Remote:** `git@github.com:Moo12/eran-landing-page.git` (SSH)
+
 ## Client context
 - Client: ערן ישראלי
 - Language: Hebrew only

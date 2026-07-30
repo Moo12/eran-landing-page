@@ -38,6 +38,12 @@ Business website for **ערן ישראלי**, a one-person iron/metal designer a
 
 ---
 
+## Repository
+
+- **GitHub:** https://github.com/Moo12/eran-landing-page (private)
+- **Clone:** `git clone git@github.com:Moo12/eran-landing-page.git`
+- **Branch:** `main`
+
 ## Dev Workflow
 
 ```bash
@@ -49,7 +55,7 @@ cd api && npm run dev      # starts Express on port 3000 (nodemon)
 cd admin && npm run build
 ```
 
-**Do NOT use `python3 -m http.server`** — the landing page requires the API; relative fetch URLs only work when served by Express.
+**Do NOT use \****`python3 -m http.server`** — the landing page requires the API; relative fetch URLs only work when served by Express.
 
 ---
 
@@ -76,13 +82,13 @@ cd admin && npm run build
 - **Instagram:** Source of gallery images (screenshots)
 - **Placeholder data to replace before going live:**
   - Phone: `050-000-0000`
-  - Email: `eran@example.com`
+  - `eran@example.com`Email: `eran@example.com`
 
 ---
 
 ## Known Constraints / Gotchas
 
 - **Node v26+** — `better-sqlite3` fails to compile; use `node:sqlite` (built-in) instead
-- **SQLite `ALTER TABLE ADD COLUMN`** — does not accept `DEFAULT CURRENT_TIMESTAMP`; use `DEFAULT NULL` (or no default) for migrations
+- **SQLite \****`ALTER TABLE ADD COLUMN`** — does not accept `DEFAULT CURRENT_TIMESTAMP`; use `DEFAULT NULL` (or no default) for migrations
 - **Admin SPA** must be rebuilt (`npm run build`) for changes to take effect in production
-- **`esbuild` postinstall** — if blocked by npm, run `npm approve-scripts esbuild` in `admin/`
+- **`esbuild`**** postinstall** — if blocked by npm, run `npm approve-scripts esbuild` in `admin/`
