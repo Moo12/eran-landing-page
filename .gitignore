@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Database (contains real data — never commit)
+api/data.db
+
+# Built admin SPA (regenerate with: cd admin && npm run build)
+admin/dist/
+
+# Environment / secrets
+.env
+
+# Editor / tool artifacts
+.claude/
+.playwright-mcp/
+nimbalyst-local/
+
+# macOS
+.DS_Store

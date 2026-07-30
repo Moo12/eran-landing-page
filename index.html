@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ערן ישראלי | עיצוב וייצור מתכת</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --iron-dark: #1e2530;
+      --iron-mid: #3a4555;
+      --iron-light: #5a6880;
+      --iron-gray: #8a9ab0;
+      --gold: #b8964e;
+      --gold-light: #d4af6a;
+      --copper: #b87333;
+      --bg-light: #c2cfe0;
+      --bg-white: #cfdae8;
+      --steel-mid: #b8c6d8;
+      --text-dark: #0f1520;
+      --text-mid: #2e3d52;
+      --text-light: #5a6880;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: linear-gradient(180deg, #f2f5f8 0%, #e2eaf2 30%, #cdd8e6 65%, #b8c8d8 100%);
+      background-attachment: fixed;
+      color: var(--text-dark);
+      direction: rtl;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184,150,78,0.25);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      box-shadow: 0 1px 20px rgba(0,0,0,0.08);
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--iron-dark);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--iron-mid);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      background: url('eran-profile.png') center top / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 64px;
+    }
+
+    /* dark gradient overlay so text is readable */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(10,18,30,0.72) 0%,
+        rgba(15,25,42,0.60) 50%,
+        rgba(8,15,25,0.80) 100%
+      );
+    }
+
+    /* subtle vignette + gold glow at bottom */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(184,150,78,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 40%, rgba(30,50,90,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      max-width: 1100px;
+      width: 100%;
+      padding: 2rem;
+    }
+
+    .hero-photo { display: none; }
+
+    .hero-text {
+      text-align: center;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+
+    .hero-title {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      margin-bottom: 2rem;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.82);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      transition: all 0.25s;
+      border-radius: 8px;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold);
+      color: var(--iron-dark);
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 6rem 2rem; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--iron-dark);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 3rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: linear-gradient(90deg, rgba(245,250,255,0.80) 0%, rgba(195,218,240,0.58) 100%);
+      backdrop-filter: blur(6px);
+      position: relative;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M60 140 L80 120 L120 90 L130 70 L160 40 L170 50 L140 80 L120 90 L90 130 L60 140Z' fill='none' stroke='%23000' stroke-width='6' stroke-linejoin='round'/%3E%3Crect x='50' y='28' width='36' height='22' rx='3' transform='rotate(-45 68 39)' fill='none' stroke='%23000' stroke-width='6'/%3E%3Ccircle cx='58' cy='145' r='10' fill='none' stroke='%23000' stroke-width='4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left -60px bottom -40px;
+      background-size: 420px 420px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      padding: 1.5rem;
+      background: var(--iron-dark);
+      border-right: 3px solid var(--gold);
+      border-radius: 10px;
+    }
+
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-top: 0.35rem;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
+      filter: contrast(1.08) saturate(0.85);
+    }
+
+    .about-image-frame {
+      position: absolute;
+      bottom: -16px;
+      left: -16px;
+      right: 16px;
+      top: 16px;
+      border: 1px solid var(--gold);
+      z-index: -1;
+    }
+
+    /* ─── GALLERY ─── */
+    #gallery {
+      background: linear-gradient(270deg, rgba(245,250,255,0.72) 0%, rgba(180,208,232,0.42) 100%);
+      backdrop-filter: blur(6px);
+      position: relative;
+    }
+    #gallery::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cellipse cx='120' cy='90' rx='70' ry='30' fill='none' stroke='%23000' stroke-width='6'/%3E%3Crect x='95' y='120' width='50' height='80' rx='4' fill='none' stroke='%23000' stroke-width='6'/%3E%3Crect x='80' y='195' width='80' height='18' rx='3' fill='none' stroke='%23000' stroke-width='5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right -40px center;
+      background-size: 480px 480px;
+      opacity: 0.045;
+      pointer-events: none;
+    }
+
+    .gallery-filters {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.3rem;
+      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.6);
+      color: var(--text-mid);
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 20px;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--iron-dark);
+      border-color: var(--iron-dark);
+      color: var(--gold-light);
+    }
+
+    /* ─── CAROUSEL ─── */
+    .carousel-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      direction: ltr;
+    }
+
+    .carousel-viewport {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 14px;
+      transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .gallery-item {
+      flex: 0 0 calc(33.333% - 10px);
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      background: var(--iron-mid);
+      border-radius: 12px;
+      position: relative;
+      z-index: 1;
+      /* z-index drops AFTER scale finishes so item stays on top during un-hover animation */
+      transition: transform 0.3s ease, z-index 0s 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.08);
+      z-index: 3;
+      transition: transform 0.3s ease, z-index 0s 0s;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.05);
+      display: block;
+    }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+
+    .gallery-item-label {
+      font-size: 0.88rem;
+      color: var(--gold-light);
+      opacity: 0;
+      transition: opacity 0.3s;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+    }
+
+    .gallery-item:hover .gallery-item-label { opacity: 1; }
+
+
+    .carousel-btn {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--iron-dark);
+      border: 1px solid rgba(184,150,78,0.3);
+      color: var(--gold-light);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      border-radius: 8px;
+    }
+
+    .carousel-btn:hover:not(:disabled) {
+      background: var(--gold);
+      color: var(--iron-dark);
+      border-color: var(--gold);
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .carousel-counter {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 1rem;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--iron-gray);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: var(--gold);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-image-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: 90vw;
+      max-width: 960px;
+    }
+
+    .lightbox-frame {
+      flex: 1;
+      height: 72vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(184,150,78,0.35);
+      box-shadow: 0 0 60px rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-nav {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+
+    .lightbox-nav:hover:not(:disabled) {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #111;
+    }
+
+    .lightbox-nav:disabled { opacity: 0.2; cursor: default; }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.5rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.6rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: #fff; }
+
+    .lightbox-caption {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .lightbox-counter {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    #testimonials { background: rgba(18, 28, 45, 0.93); backdrop-filter: blur(6px); }
+
+    #testimonials .section-title { color: #fff; }
+    #testimonials .section-label { color: var(--gold); }
+    #testimonials .carousel-dot { background: rgba(255,255,255,0.2); }
+    #testimonials .carousel-dot.active { background: var(--gold); }
+
+    .testimonial-item {
+      flex: 0 0 calc(33.333% - 10px);
+      background: var(--iron-mid);
+      padding: 2rem;
+      border-top: 2px solid var(--gold);
+      border-radius: 12px;
+    }
+
+    .testimonial-quote {
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #bbb;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: var(--iron-gray);
+      margin-top: 0.25rem;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: linear-gradient(90deg, rgba(185,212,238,0.62) 0%, rgba(245,250,255,0.75) 100%);
+      backdrop-filter: blur(6px);
+      position: relative;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M40 160 Q60 80 120 60 Q160 45 170 90 Q180 130 140 150 Q100 170 40 160Z' fill='none' stroke='%23000' stroke-width='5'/%3E%3Cpath d='M100 60 L100 30 M85 65 L70 40 M115 65 L130 40' stroke='%23000' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left -30px top 40px;
+      background-size: 400px 400px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text-mid);
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      color: var(--text-mid);
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--iron-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      border-radius: 8px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 46px;
+      height: 46px;
+      background: var(--iron-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      border-radius: 50%;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-mid);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.75);
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+      direction: rtl;
+      border-radius: 8px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+
+    .form-group textarea { min-height: 130px; resize: vertical; }
+
+    .submit-btn {
+      padding: 0.9rem 2.5rem;
+      background: var(--iron-dark);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.25s;
+      align-self: flex-start;
+      border-radius: 8px;
+    }
+
+    /* ─── WHATSAPP FLOAT ─── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 1.8rem;
+      left: 1.8rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.75rem 1.2rem 0.75rem 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: all 0.25s;
+      direction: ltr;
+    }
+
+    .whatsapp-float:hover {
+      background: #1ebe5d;
+      box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+      transform: translateY(-2px);
+    }
+
+    .whatsapp-float svg { flex-shrink: 0; }
+
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+    }
+
+    .whatsapp-float { animation: wa-pulse 2.5s ease-in-out infinite; }
+    .whatsapp-float:hover { animation: none; }
+
+    .submit-btn:hover {
+      background: var(--gold);
+      color: var(--iron-dark);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #111;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(184,150,78,0.15);
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    footer span { color: var(--gold); }
+
+    /* ─── HAMBURGER BUTTON ─── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 110;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--iron-dark);
+      transition: all 0.25s;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-desc { margin-inline: auto; }
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .about-image-wrap { display: none; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      /* Nav: show hamburger, collapse links */
+      .nav-hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        right: 0;
+        left: 0;
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(184,150,78,0.25);
+        box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 1rem; }
+
+      /* Carousel: 1 item at a time on mobile */
+      .gallery-item, .testimonial-item { flex: 0 0 100%; }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 1rem; }
+      section { padding: 4rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <div class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-left:8px;">
+        <!-- hammer head -->
+        <rect x="2" y="7" width="16" height="9" rx="2" fill="var(--gold)" opacity="0.9"/>
+        <!-- hammer handle -->
+        <line x1="15" y1="16" x2="28" y2="29" stroke="var(--iron-mid)" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- anvil body -->
+        <path d="M4 33 H32 L30 29 H20 L18 27 H10 L8 29 H4 Z" fill="var(--iron-dark)" opacity="0.75"/>
+        <!-- anvil horn -->
+        <path d="M30 29 Q34 28 34 25 Q34 22 30 22 L24 22 L24 29 Z" fill="var(--iron-dark)" opacity="0.6"/>
+        <!-- spark dots -->
+        <circle cx="20" cy="10" r="1.5" fill="var(--gold-light)" opacity="0.8"/>
+        <circle cx="23" cy="7" r="1" fill="var(--gold-light)" opacity="0.6"/>
+        <circle cx="17" cy="6" r="1" fill="var(--gold-light)" opacity="0.5"/>
+      </svg>
+      ערן ישראלי
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="תפריט">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">אודות</a></li>
+      <li><a href="#gallery">גלריה</a></li>
+      <li><a href="#testimonials">המלצות</a></li>
+      <li><a href="#contact">צור קשר</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img class="hero-photo" src="eran-profile.png" alt="ערן ישראלי" />
+      <div class="hero-text">
+        <p class="hero-eyebrow">עיצוב וייצור מתכת</p>
+        <h1 class="hero-name">ערן<br />ישראלי</h1>
+        <p class="hero-title">אמן ברזל &amp; מעצב מתכת</p>
+        <p class="hero-desc">
+          יצירות ברזל מותאמות אישית — שידות, שערים, מעקות, ריהוט ואמנות פלדה.
+          כל פריט נולד מהחומר, נוצר ביד ומחובר לרוח המקום.
+        </p>
+        <a href="#contact" class="hero-cta">בואו נדבר</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">אודותי</p>
+          <h2 class="section-title">אוהב ברזל.<br />חי את המלאכה.</h2>
+          <div class="divider"></div>
+          <p>
+            שמי ערן ישראלי, אמן ברזל ומעצב מתכת עם למעלה מ-15 שנות ניסיון.
+            המסגרייה שלי היא מקום שבו רעיונות הופכים למציאות — חלל שבו האש, הפטיש
+            והיצירתיות פועלים יחד.
+          </p>
+          <p>
+            אני עוסק בעיצוב וייצור מותאם אישית: שערים ומעקות, ריהוט ברזל,
+            פריטי עיצוב ואמנות מתכת לגינה ולבית. כל יצירה היא שיח
+            בין הלקוח לחומר — אני מקשיב לצרכים ומתרגם אותם לפלדה.
+          </p>
+          <p>
+            העבודה שלי מחברת בין הידע המסורתי של הנפחות לבין עיצוב עכשווי
+            ונקי. התוצאה: יצירות שמחזיקות מעמד, עומדות במבחן הזמן ומוסיפות
+            ערך אמיתי לכל מרחב.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-num">15+</div>
+              <div class="stat-label">שנות ניסיון</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">200+</div>
+              <div class="stat-label">פרויקטים</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">עבודת יד</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">אחד</div>
+              <div class="stat-label">אמן, יצירה אחת</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-image-wrap">
+          <img class="about-image" src="eran-profile.png" alt="ערן בסדנה" />
+          <div class="about-image-frame"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GALLERY ─── -->
+  <section id="gallery">
+    <div class="section-inner">
+      <p class="section-label">עבודות</p>
+      <h2 class="section-title">גלריה</h2>
+      <div class="divider"></div>
+
+      <div class="gallery-filters" id="galleryFilters">
+        <!-- populated by JS from /api/categories -->
+      </div>
+
+      <div class="carousel-wrap">
+        <button class="carousel-btn" id="galleryPrev">&#8249;</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="galleryTrack"></div>
+        </div>
+        <button class="carousel-btn" id="galleryNext">&#8250;</button>
+      </div>
+
+      <div class="carousel-counter" id="galleryCounter"></div>
+      <div class="carousel-dots" id="galleryDots"></div>
+
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ─── -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <p class="section-label">לקוחות מרוצים</p>
+      <h2 class="section-title">מה אומרים עליי</h2>
+      <div class="divider"></div>
+
+      <div class="carousel-wrap">
+        <button class="carousel-btn" id="testimonialPrev">&#8249;</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="testimonialTrack"></div>
+        </div>
+        <button class="carousel-btn" id="testimonialNext">&#8250;</button>
+      </div>
+
+      <div class="carousel-dots" id="testimonialDots"></div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label">בואו נדבר</p>
+      <h2 class="section-title">צור קשר</h2>
+      <div class="divider"></div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>
+            מעוניינים בפרויקט? רוצים לשמוע עוד? אני כאן לכל שאלה.
+            ניתן לפנות בטלפון, בוואטסאפ או למלא את הטופס — ואחזור אליכם
+            תוך יום עסקים.
+          </p>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <span>052-866-6376</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <span>eran@example.com</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <span>המרכז, ישראל</span>
+          </div>
+
+          <div class="social-links">
+            <a href="#" class="social-link" title="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <circle cx="12" cy="12" r="5"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" title="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" title="WhatsApp">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">שם מלא</label>
+            <input type="text" id="name" name="name" placeholder="ישראל ישראלי" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">טלפון</label>
+            <input type="tel" id="phone" name="phone" placeholder="05X-XXX-XXXX" />
+          </div>
+          <div class="form-group">
+            <label for="email">אימייל</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="message">מה מעניין אתכם?</label>
+            <textarea id="message" name="message" placeholder="ספרו לי קצת על הפרויקט..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">שלח.י הודעה</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <p>© 2026 <span>ערן ישראלי</span> — עיצוב וייצור מתכת. כל הזכויות שמורות.</p>
+  </footer>
+
+  <!-- ─── WHATSAPP FLOAT ─── -->
+  <a class="whatsapp-float" href="https://wa.me/972528666376" target="_blank" rel="noopener" aria-label="שלח הודעה בוואטסאפ">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- ─── LIGHTBOX ─── -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-image-wrap" style="direction:ltr">
+      <button class="lightbox-nav" id="lbPrev" onclick="lightboxNav(-1)">‹</button>
+      <div class="lightbox-frame">
+        <img id="lightbox-img" src="" alt="" />
+      </div>
+      <button class="lightbox-nav" id="lbNext" onclick="lightboxNav(1)">›</button>
+    </div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <script>
+    // In production with a separate API host, set this to the absolute API URL.
+    // Leave empty ('') when the Express server serves both the frontend and API.
+    const API_BASE = '';
+
+    if (location.protocol === 'file:') {
+      document.body.innerHTML = '<div style="font-family:sans-serif;padding:2rem;direction:ltr">'
+        + '<h2 style="color:#b8964e">⚠ Open via the dev server</h2>'
+        + '<p>This page requires the API. Open <a href="http://localhost:3000">http://localhost:3000</a> instead.</p>'
+        + '<p style="color:#888">Run: <code>cd api &amp;&amp; npm run dev</code></p>'
+        + '</div>';
+    }
+
+    let galleryData = [];
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function renderTestimonials(list) {
+      if (!list || !list.length) return;
+      testimonialCarousel.build(list, t => `
+        <div class="testimonial-item">
+          <div class="testimonial-quote">"</div>
+          <div class="stars">${'★'.repeat(Math.max(1, Math.min(5, t.stars || 5)))}</div>
+          <p class="testimonial-text">${escHtml(t.text)}</p>
+          <div class="testimonial-author">${escHtml(t.author)}</div>
+          <div class="testimonial-role">${escHtml(t.role || '')}</div>
+        </div>
+      `);
+    }
+
+    function renderFilterButtons(categories) {
+      const container = document.querySelector('.gallery-filters');
+      const all = [{ slug: 'all', label: 'הכל' }, ...categories];
+      container.innerHTML = all.map((cat, i) => `
+        <button class="filter-btn${i === 0 ? ' active' : ''}" data-filter="${escHtml(cat.slug)}">${escHtml(cat.label)}</button>
+      `).join('');
+      container.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = btn.dataset.filter;
+          buildTrack();
+        });
+      });
+    }
+
+    async function loadFromAPI() {
+      try {
+        const [gRes, tRes, cRes] = await Promise.all([
+          fetch(`${API_BASE}/api/gallery`),
+          fetch(`${API_BASE}/api/testimonials`),
+          fetch(`${API_BASE}/api/categories`),
+        ]);
+        if (!gRes.ok || !tRes.ok || !cRes.ok) {
+          throw new Error(`API error — gallery:${gRes.status} testimonials:${tRes.status} categories:${cRes.status}`);
+        }
+        galleryData = await gRes.json();
+        renderFilterButtons(await cRes.json());
+        renderTestimonials(await tRes.json());
+        buildTrack();
+      } catch (err) {
+        console.error('[loadFromAPI]', err);
+      }
+    }
+
+    let activeFilter = 'all';
+    let lbIndex = 0;
+
+    function filteredItems() {
+      return galleryData.filter(d => activeFilter === 'all' || d.category === activeFilter);
+    }
+
+    function makeCarousel({ trackId, prevId, nextId, counterId, dotsId, getVisible, gap = 14, autoplay = 0 }) {
+      let startIdx = 0;
+      let items = [];
+      let autoRaf = null;
+      let autoPos = 0; // pixel position used during smooth autoplay
+
+      function getItemW() {
+        const item = document.getElementById(trackId).firstElementChild;
+        return item ? item.offsetWidth + gap : 0;
+      }
+
+      function applyTransform() {
+        const track = document.getElementById(trackId);
+        const itemW = getItemW();
+        if (!itemW) return;
+        track.style.transition = 'transform 0.42s cubic-bezier(0.4,0,0.2,1)';
+        track.style.transform = `translateX(-${startIdx * itemW}px)`;
+      }
+
+      function updateControls() {
+        const vis = getVisible();
+        const maxStart = Math.max(0, items.length - vis);
+        document.getElementById(prevId).disabled = startIdx >= maxStart;
+        document.getElementById(nextId).disabled = startIdx === 0;
+
+        if (counterId) {
+          const end = Math.min(startIdx + vis, items.length);
+          document.getElementById(counterId).textContent =
+            items.length > 0 ? `${startIdx + 1}–${end} מתוך ${items.length}` : '';
+        }
+
+        if (dotsId) {
+          const dotsEl = document.getElementById(dotsId);
+          const totalDots = Math.max(1, items.length - vis + 1);
+          dotsEl.innerHTML = Array.from({ length: totalDots }, (_, i) =>
+            `<span class="carousel-dot${i === startIdx ? ' active' : ''}"></span>`
+          ).join('');
+          dotsEl.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+            dot.addEventListener('click', () => jump(i));
+          });
+        }
+      }
+
+      function stopAuto() {
+        cancelAnimationFrame(autoRaf);
+        autoRaf = null;
+      }
+
+      function startAuto() {
+        if (!autoplay) return;
+        stopAuto();
+        // Sync pixel position with current startIdx so resume feels seamless
+        autoPos = startIdx * (getItemW() || 0);
+
+        let prevTs = null;
+        function tick(ts) {
+          if (prevTs === null) prevTs = ts;
+          const dt = Math.min((ts - prevTs) / 1000, 0.1); // cap dt to avoid jumps after tab-switch
+          prevTs = ts;
+
+          const itemW = getItemW();
+          if (!itemW) { autoRaf = requestAnimationFrame(tick); return; }
+
+          const maxPos = Math.max(0, items.length - getVisible()) * itemW;
+          autoPos += autoplay * dt;
+          if (autoPos >= maxPos + itemW) autoPos = 0; // loop back — 1 frame snap, imperceptible
+
+          const track = document.getElementById(trackId);
+          track.style.transition = 'none';
+          track.style.transform = `translateX(-${autoPos}px)`;
+
+          // Keep startIdx in sync for dots/counter
+          const newIdx = Math.min(Math.round(autoPos / itemW), Math.max(0, items.length - getVisible()));
+          if (newIdx !== startIdx) { startIdx = newIdx; updateControls(); }
+
+          autoRaf = requestAnimationFrame(tick);
+        }
+        autoRaf = requestAnimationFrame(tick);
+      }
+
+      function build(newItems, renderFn) {
+        items = newItems;
+        startIdx = 0;
+        autoPos = 0;
+        stopAuto();
+        const track = document.getElementById(trackId);
+        track.style.transition = 'none';
+        track.style.transform = 'translateX(0)';
+        track.innerHTML = items.map((item, i) => renderFn(item, i)).join('');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          applyTransform();
+          updateControls();
+          if (autoplay) {
+            const wrap = document.getElementById(trackId).closest('.carousel-wrap');
+            if (wrap && !wrap._hoverBound) {
+              wrap.addEventListener('mouseenter', stopAuto);
+              wrap.addEventListener('mouseleave', startAuto);
+              wrap._hoverBound = true;
+            }
+            startAuto();
+          }
+        }));
+      }
+
+      function slide(dir) {
+        const maxStart = Math.max(0, items.length - getVisible());
+        startIdx = Math.max(0, Math.min(startIdx + dir, maxStart));
+        autoPos = startIdx * (getItemW() || 0);
+        applyTransform();
+        updateControls();
+      }
+
+      function jump(idx) {
+        startIdx = idx;
+        autoPos = idx * (getItemW() || 0);
+        applyTransform();
+        updateControls();
+      }
+
+      return { build, slide, jump, reset: () => jump(0) };
+    }
+
+    const galleryCarousel = makeCarousel({
+      trackId: 'galleryTrack', prevId: 'galleryPrev', nextId: 'galleryNext',
+      counterId: 'galleryCounter', dotsId: 'galleryDots',
+      getVisible: () => window.innerWidth <= 768 ? 1 : 3,
+      autoplay: 60, // pixels per second
+    });
+
+    const testimonialCarousel = makeCarousel({
+      trackId: 'testimonialTrack', prevId: 'testimonialPrev', nextId: 'testimonialNext',
+      dotsId: 'testimonialDots',
+      getVisible: () => window.innerWidth <= 768 ? 1 : 3,
+    });
+
+    document.getElementById('galleryPrev').addEventListener('click', () => galleryCarousel.slide(1));
+    document.getElementById('galleryNext').addEventListener('click', () => galleryCarousel.slide(-1));
+    document.getElementById('testimonialPrev').addEventListener('click', () => testimonialCarousel.slide(1));
+    document.getElementById('testimonialNext').addEventListener('click', () => testimonialCarousel.slide(-1));
+
+    function buildTrack() {
+      galleryCarousel.build(filteredItems(), (d, i) => `
+        <div class="gallery-item" onclick="openLightbox(${i})">
+          <img src="${d.src}" alt="${escHtml(d.label)}" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">${escHtml(d.label)}</span></div>
+        </div>
+      `);
+    }
+
+    loadFromAPI();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { galleryCarousel.reset(); testimonialCarousel.reset(); }, 150);
+    });
+
+    // ─── LIGHTBOX ───
+    function openLightbox(idx) {
+      lbIndex = idx;
+      showLightboxImage();
+      document.getElementById('lightbox').classList.add('open');
+      document.addEventListener('keydown', lightboxKeyHandler);
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.removeEventListener('keydown', lightboxKeyHandler);
+    }
+
+    function showLightboxImage() {
+      const items = filteredItems();
+      const d = items[lbIndex];
+      if (!d) return;
+      const img = document.getElementById('lightbox-img');
+      img.style.opacity = '0';
+      img.src = d.src;
+      img.onload = () => { img.style.opacity = '1'; };
+      document.getElementById('lightbox-caption').textContent = d.label;
+      document.getElementById('lightbox-counter').textContent = `${lbIndex + 1} / ${items.length}`;
+      document.getElementById('lbPrev').disabled = lbIndex === 0;
+      document.getElementById('lbNext').disabled = lbIndex >= items.length - 1;
+    }
+
+    function lightboxNav(dir) {
+      const items = filteredItems();
+      lbIndex = Math.max(0, Math.min(lbIndex + dir, items.length - 1));
+      showLightboxImage();
+    }
+
+    function lightboxKeyHandler(e) {
+      if (e.key === 'ArrowLeft')  lightboxNav(-1);
+      if (e.key === 'ArrowRight') lightboxNav(1);
+      if (e.key === 'Escape')     closeLightbox();
+    }
+
+    // close on backdrop click
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // ─── HAMBURGER NAV ───
+    const hamburger = document.getElementById('navHamburger');
+    const navLinks  = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ─── NAV ACTIVE LINK ON SCROLL ───
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
+      });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold-light)' : '';
+      });
+    });
+
+    // Form
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.submit-btn');
+      btn.textContent = 'ההודעה נשלחה ✓';
+      btn.style.background = 'var(--gold)';
+      btn.style.color = 'var(--iron-dark)';
+      e.target.reset();
+      setTimeout(() => {
+        btn.textContent = 'שלח הודעה';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
