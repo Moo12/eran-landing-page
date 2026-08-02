@@ -851,6 +851,8 @@
 
       /* Carousel: 1 item at a time on mobile */
       .gallery-item, .testimonial-item { flex: 0 0 100%; }
+      .carousel-btn { display: none; }
+      .lightbox-nav { display: none; }
     }
 
     @media (max-width: 600px) {
@@ -1026,7 +1028,7 @@
           </div>
           <div class="contact-item">
             <div class="contact-icon">✉️</div>
-            <span>eran@example.com</span>
+            <span>eranisraeli10@gmail.com</span>
           </div>
           <div class="contact-item">
             <div class="contact-icon">📍</div>
@@ -1316,6 +1318,22 @@
     document.getElementById('galleryNext').addEventListener('click', () => galleryCarousel.slide(-1));
     document.getElementById('testimonialPrev').addEventListener('click', () => testimonialCarousel.slide(1));
     document.getElementById('testimonialNext').addEventListener('click', () => testimonialCarousel.slide(-1));
+
+    function addSwipe(el, onLeft, onRight) {
+      let sx = 0;
+      el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+      el.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 40) dx < 0 ? onLeft() : onRight();
+      }, { passive: true });
+    }
+
+    addSwipe(document.getElementById('galleryTrack').parentElement,
+      () => galleryCarousel.slide(1), () => galleryCarousel.slide(-1));
+    addSwipe(document.getElementById('testimonialTrack').parentElement,
+      () => testimonialCarousel.slide(1), () => testimonialCarousel.slide(-1));
+    addSwipe(document.querySelector('.lightbox-frame'),
+      () => lightboxNav(1), () => lightboxNav(-1));
 
     function buildTrack() {
       galleryCarousel.build(filteredItems(), (d, i) => `
