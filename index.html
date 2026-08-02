@@ -563,6 +563,18 @@
       letter-spacing: 0.1em;
     }
 
+    .lightbox-filter {
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      background: rgba(184,150,78,0.12);
+      border: 1px solid rgba(184,150,78,0.4);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+
     /* ─── TESTIMONIALS ─── */
     #testimonials { background: rgba(18, 28, 45, 0.93); backdrop-filter: blur(6px); }
 
@@ -1094,6 +1106,7 @@
   <!-- ─── LIGHTBOX ─── -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-filter" id="lightbox-filter" style="display:none"></div>
     <div class="lightbox-image-wrap" style="direction:ltr">
       <button class="lightbox-nav" id="lbPrev" onclick="lightboxNav(-1)">‹</button>
       <div class="lightbox-frame">
@@ -1338,7 +1351,7 @@
     function buildTrack() {
       galleryCarousel.build(filteredItems(), (d, i) => `
         <div class="gallery-item" onclick="openLightbox(${i})">
-          <img src="${d.src}" alt="${escHtml(d.label)}" />
+          <img src="${d.src}" alt="${escHtml(d.label)}" loading="lazy" />
           <div class="gallery-item-overlay"><span class="gallery-item-label">${escHtml(d.label)}</span></div>
         </div>
       `);
@@ -1377,6 +1390,14 @@
       document.getElementById('lightbox-counter').textContent = `${lbIndex + 1} / ${items.length}`;
       document.getElementById('lbPrev').disabled = lbIndex === 0;
       document.getElementById('lbNext').disabled = lbIndex >= items.length - 1;
+      const filterEl = document.getElementById('lightbox-filter');
+      if (activeFilter !== 'all') {
+        const activeBtn = document.querySelector('.filter-btn.active');
+        filterEl.textContent = activeBtn ? activeBtn.textContent.trim() : activeFilter;
+        filterEl.style.display = '';
+      } else {
+        filterEl.style.display = 'none';
+      }
     }
 
     function lightboxNav(dir) {
