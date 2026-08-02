@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const { execFileSync } = require('child_process');
+const fs = require('fs');
 const db = require('../db');
 const { requireAuth } = require('../middleware/auth');
 
@@ -28,7 +30,22 @@ router.post('/', requireAuth, upload.single('image'), (req, res) => {
   if (!req.file || !label || !category) {
     return res.status(400).json({ error: 'image, label, and category are required' });
   }
-  const src = `gallery/${req.file.filename}`;
+
+  let filename = req.file.filename;
+  const originalPath = req.file.path;
+
+  // Convert to WebP if cwebp is available
+  try {
+    const webpFilename = filename.replace(/\.[^.]+$/, '.webp');
+    const webpPath = path.join(path.dirname(originalPath), webpFilename);
+    execFileSync('cwebp', ['-q', '82', '-resize', '1200', '0', originalPath, '-o', webpPath]);
+    fs.unlinkSync(originalPath);
+    filename = webpFilename;
+  } catch {
+    // cwebp not available — keep original file
+  }
+
+  const src = `gallery/${filename}`;
   const result = db
     .prepare('INSERT INTO gallery_items (src, label, category) VALUES (?, ?, ?)')
     .run(src, label, category);

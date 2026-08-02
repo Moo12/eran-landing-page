@@ -15,7 +15,10 @@ app.get('/admin/*', (req, res) => {
 });
 
 // Static files: landing page, gallery images
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(path.join(__dirname, '..'), {
+  maxAge: '30d',
+  etag: true,
+}));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));
