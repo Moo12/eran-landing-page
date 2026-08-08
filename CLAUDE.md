@@ -51,7 +51,7 @@ admin/
 --text-light: #5a6880
 ```
 
-Body background: fixed vertical gradient `#f2f5f8```````` → ````````#e2eaf2```````` → ````````#cdd8e6```````` → #b8c8d8` (light to steel-blue).
+Body background: fixed vertical gradient `#f2f5f8```````````` → ````````````#e2eaf2```````````` → ````````````#cdd8e6```````````` → #b8c8d8` (light to steel-blue).
 
 ## Key CSS notes
 - `direction: ltr` is explicitly set on `.carousel-wrap` to override RTL inheritance so carousel buttons appear left/right correctly
