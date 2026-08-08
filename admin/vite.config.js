@@ -9,6 +9,9 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:3000',
       '/gallery': 'http://localhost:3000',
+      '/uploads': 'http://localhost:3000',
+      // Root-level static assets (profile photo, logo, etc.)
+      '^/[^/]+\\.(png|jpg|jpeg|webp|gif|svg)$': 'http://localhost:3000',
     },
   },
   build: {

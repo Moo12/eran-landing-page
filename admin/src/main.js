@@ -6,6 +6,7 @@ import Register from './views/Register.vue';
 import GalleryView from './views/GalleryView.vue';
 import TestimonialsView from './views/TestimonialsView.vue';
 import UsersView from './views/UsersView.vue';
+import SettingsView from './views/SettingsView.vue';
 import './style.css';
 
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
   { path: '/admin/gallery', component: GalleryView, meta: { requiresAuth: true } },
   { path: '/admin/testimonials', component: TestimonialsView, meta: { requiresAuth: true } },
   { path: '/admin/users', component: UsersView, meta: { requiresAuth: true } },
+  { path: '/admin/settings', component: SettingsView, meta: { requiresAuth: true } },
   { path: '/:pathMatch(.*)*', redirect: '/admin/login' },
 ];
 

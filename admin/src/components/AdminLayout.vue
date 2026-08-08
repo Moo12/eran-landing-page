@@ -62,13 +62,15 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 const navItems = [
-  { to: '/admin/gallery', icon: '🖼', label: 'Gallery' },
-  { to: '/admin/testimonials', icon: '💬', label: 'Testimonials' },
+  { to: '/admin/settings', icon: '⚙️', label: 'הגדרת תמונות ראשיות' },
+  { to: '/admin/gallery', icon: '🖼', label: 'גלרית תמונות' },
+  { to: '/admin/testimonials', icon: '💬', label: 'ביקורות' },
   { to: '/admin/users', icon: '👤', label: 'Users' },
 ];
 
@@ -76,4 +78,17 @@ function logout() {
   localStorage.removeItem('admin_token');
   router.push('/admin/login');
 }
+
+onMounted(async () => {
+  const token = localStorage.getItem('admin_token');
+  if (!token) { router.push('/admin/login'); return; }
+  try {
+    const res = await fetch('/api/auth/users', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.status === 401) logout();
+  } catch {
+    // network error — let the user stay and retry
+  }
+});
 </script>

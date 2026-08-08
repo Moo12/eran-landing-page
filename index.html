@@ -1157,10 +1157,11 @@
 
     async function loadFromAPI() {
       try {
-        const [gRes, tRes, cRes] = await Promise.all([
+        const [gRes, tRes, cRes, sRes] = await Promise.all([
           fetch(`${API_BASE}/api/gallery`),
           fetch(`${API_BASE}/api/testimonials`),
           fetch(`${API_BASE}/api/categories`),
+          fetch(`${API_BASE}/api/settings`),
         ]);
         if (!gRes.ok || !tRes.ok || !cRes.ok) {
           throw new Error(`API error — gallery:${gRes.status} testimonials:${tRes.status} categories:${cRes.status}`);
@@ -1169,6 +1170,16 @@
         renderFilterButtons(await cRes.json());
         renderTestimonials(await tRes.json());
         buildTrack();
+        if (sRes.ok) {
+          const s = await sRes.json();
+          if (s.hero_image) {
+            document.querySelector('.hero').style.backgroundImage = `url('${s.hero_image}')`;
+            document.querySelector('.hero-photo').src = s.hero_image;
+          }
+          if (s.about_image) {
+            document.querySelector('.about-image').src = s.about_image;
+          }
+        }
       } catch (err) {
         console.error('[loadFromAPI]', err);
       }

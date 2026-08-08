@@ -37,7 +37,20 @@ db.exec(`
     password_hash TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
+
+  CREATE TABLE IF NOT EXISTS setting_images (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    slot TEXT NOT NULL,
+    src TEXT NOT NULL,
+    is_active INTEGER NOT NULL DEFAULT 0,
+    uploaded_at INTEGER NOT NULL DEFAULT 0,
+    UNIQUE(slot, src)
+  );
 `);
+
+// Seed default images — safe to run on every startup
+db.prepare("INSERT OR IGNORE INTO setting_images (slot, src, is_active) VALUES (?, ?, 1)").run('hero_image', 'eran-profile.png');
+db.prepare("INSERT OR IGNORE INTO setting_images (slot, src, is_active) VALUES (?, ?, 1)").run('about_image', 'eran-profile.png');
 
 // Migration: add created_at to admin_users if the existing DB predates the column
 try {

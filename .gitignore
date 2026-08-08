@@ -4,6 +4,9 @@ node_modules/
 # Database (contains real data — never commit)
 api/data.db
 
+# Uploaded images (live on server disk, not in git)
+uploads/
+
 # Built admin SPA (regenerate with: cd admin && npm run build)
 admin/dist/
 

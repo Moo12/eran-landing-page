@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, '..'), {
 }));
 
 // API routes
+app.use('/api/settings', require('./routes/settings'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/categories', require('./routes/categories'));
